@@ -1,0 +1,153 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+#Cargar librerias
+library(twitteR)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(rtweet)
+```
+
+```{r}
+consumerKey = "Xls3fBLc7bTL9UHqxe2e5V2Dq"
+consumerSecret = "hdX0WId2A7Vym7Y3BrWHarTSUhkiedkcGIVwZyNSQj07XH52vD"
+accessToken = "2037343282879353345-krbucgX35c6i9VqaPHEGhclGU2hgpG"
+accessSecret = "gWT3NJWWOCDFr2kptOvDVrbAtCefAPdDR5aTZ9KQgUFjg"
+options(httr_oauth_cache=TRUE)
+setup_twitter_oauth(consumer_key = consumerKey, consumer_secret = consumerSecret,
+access_token = accessToken, access_secret = accessSecret)
+```
+
+```{r}
+# El nombre que le asgnamos a la app en el formulario de autorización
+appname <- "LaSalle_TextMining"
+## consumer key (en el ejemplo no es una clave real, usar la verdadera)
+consumer_key <- "7Q3dUHgjK7pmhnx6YakmR89T1"
+## consumer secret (en el ejemplo no es un clave real, usar la verdadera)
+consumer_secret <- "4F9bzDz6QazNcsjjGAAxpIMKpffcZ9J0k7KcWE8GN7nbxN2egk"
+## consumer key (en el ejemplo no es una clave real, usar la verdadera)
+access_token <- "1037343181879353345-zxTb66zOqiNkjTcaZhgfjTaSwhZ1oD"
+## consumer secret (en el ejemplo no es un clave real, usar la verdadera)
+access_secret <- "QIQjPGbkYkruQEcTn8pGAkBMy2QORLcEx032GOCHccpeA"
+
+
+twitter_token <- create_token(
+  app = appname,
+  consumer_key = consumer_key,
+  consumer_secret = consumer_secret,
+  access_token = access_token, 
+  access_secret = access_secret)
+```
+
+
+Extracción de datos (Función search Tweets)
+```{r}
+#Datos Colombia
+tweets_coronavirus_Colombia1 <- search_tweets("#CoronavirusEnColombia", n = 1e5, retryonratelimit = TRUE)
+
+save_as_csv(tweets_coronavirus_Colombia1, "CSV_coronavirus_Colombia1.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#setwd("C:/Users/josen/OneDrive/Documentos/Coronavirus R")
+#tweets_coronavirus <- read.csv("CSV_coronavirus_Colombia1.csv", fileEncoding = "UTF-8")
+
+```
+
+```{r}
+tweets_coronavirus_Colombia2 <- search_tweets("#Covid19Colombia", n = 1e5, retryonratelimit = TRUE)
+
+save_as_csv(tweets_coronavirus_Colombia2, "CSV_coronavirus_Colombia2.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+```
+
+```{r}
+tweets_coronavirus_MinsaludCo <- search_tweets("@MinSaludCol", n = 1e5, retryonratelimit = TRUE)
+
+save_as_csv(tweets_coronavirus_MinsaludCo, "CSV_Minsalud.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+```
+
+
+```{r}
+#Datos Italia
+tweets_coronavirus_Italy_It <- search_tweets("#COVID19italia", n = 1e5, retryonratelimit = TRUE, lang = "it")
+
+save_as_csv(tweets_coronavirus_Italy_It, "CSV_coronavirus_Italy_It.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#------------------------------------------------------------------------------------------------
+
+tweets_coronavirus_Italy_En <- search_tweets("#COVID19italia", n = 1e5, retryonratelimit = TRUE, lang = "en")
+
+save_as_csv(tweets_coronavirus_Italy_En, "CSV_coronavirus_Italy_En.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+```
+
+
+```{r}
+#Datos España
+tweets_coronavirus_Spain_Es <- search_tweets("#covid19ESP", n = 1e5, retryonratelimit = TRUE, lang ="es")
+
+save_as_csv(tweets_coronavirus_Spain_Es, "CSV_coronavirus_Spain_Es.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#-------------------------------------------------------------------------------------------------
+
+tweets_coronavirus_Spain_En <- search_tweets("#covid19ESP", n = 1e5, retryonratelimit = TRUE, lang ="en")
+
+save_as_csv(tweets_coronavirus_Spain_En, "CSV_coronavirus_Spain_En.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+```
+
+
+```{r}
+#Datos Francia
+tweets_coronavirus_France_fr <- search_tweets("#COVID19france", n = 1e5, retryonratelimit = TRUE, lang = "fr")
+
+save_as_csv(tweets_coronavirus_France_fr, "CSV_coronavirus_France_fr.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#------------------------------------------------------------------------------------------------
+tweets_coronavirus_France_en <- search_tweets("#COVID19france", n = 1e5, retryonratelimit = TRUE, lang = "en")
+
+save_as_csv(tweets_coronavirus_France_en, "CSV_coronavirus_France_en.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+```
+
+
+```{r}
+#Datos Alemania
+tweets_coronavirus_Alemania_ge <- search_tweets("#COVID_19", n = 1e5, retryonratelimit = TRUE, lang = "de")
+
+save_as_csv(tweets_coronavirus_Alemania_ge, "CSV_coronavirus_Alemania_ge.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#------------------------------------------------------------------------------------------------
+tweets_coronavirus_Alemania2 <- search_tweets("#Covidiot", n = 1e5, retryonratelimit = TRUE, lang = "de")
+
+save_as_csv(tweets_coronavirus_Alemania2, "CSV_coronavirus_Alemania2.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+
+```
+
+
+
+```{r}
+#Datos USA
+tweets_coronavirus_USA <- search_tweets("#ChineseVirus", n = 1e5, geocode = lookup_coords("usa"), lang ="en", retryonratelimit = TRUE)
+
+save_as_csv(tweets_coronavirus_USA, "CSV_coronavirus_USA.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#-----------------------------------------------------------------------------------------------
+tweets_coronavirus_USA_2 <- search_tweets("#coronavirus", n = 1e5, geocode = lookup_coords("usa"), lang ="en", retryonratelimit = TRUE)
+
+save_as_csv(tweets_coronavirus_USA_2, "CSV_coronavirus_USA_2.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#------------------------------------------------------------------------------------------------
+tweets_coronavirus_USA_3 <- search_tweets("#COVID19", n = 1e5, geocode = lookup_coords("usa"), lang ="en", retryonratelimit = TRUE)
+
+save_as_csv(tweets_coronavirus_USA_3, "CSV_coronavirus_USA_3.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#------------------------------------------------------------------------------------------------
+tweets_coronavirus_USA_4 <- search_tweets("#QuarantineLife", n = 1e5, geocode = lookup_coords("usa"), lang ="en", retryonratelimit = TRUE)
+
+save_as_csv(tweets_coronavirus_USA_4, "CSV_coronavirus_USA_4.csv", prepend_ids = TRUE, na = "", fileEncoding = "UTF-8")
+
+#setwd("C:/Users/josen/OneDrive/Documentos/Coronavirus R")
+#tweets_coronavirus_USA_EJ <- read.csv("CSV_coronavirus_USA_2.csv", fileEncoding = "UTF-8")
+```

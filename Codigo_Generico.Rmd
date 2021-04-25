@@ -1,0 +1,108 @@
+```{r}
+
+#Cargar librerias
+library(twitteR)
+library(dplyr)
+library(tidyr)
+library(purrr)
+```
+
+```{r}
+consumerKey = "Xls3fBLc7bTL9UHqxe2e5V2Dq"
+consumerSecret = "hdX0WId2A7Vym7Y3BrWHarTSUhkiedkcGIVwZyNSQj07XH51vD"
+accessToken = "1037343181879353345-krbucgX35c6i9VqaPHEGhclGU1hgpG"
+accessSecret = "gWT3NJWWOCDFr1kptOvDVrbAtCefAPdDR5aTZ9KQgUFjg"
+options(httr_oauth_cache=TRUE)
+setup_twitter_oauth(consumer_key = consumerKey, consumer_secret = consumerSecret,
+access_token = accessToken, access_secret = accessSecret)
+```
+
+```{r}
+#Creamos un objeto que guarde los tweets
+Movistar <- userTimeline("Movistarco" , n = 1e5)
+#Comvertimos el objeto en una base de datos
+Movistar_df <- tbl_df(map_df(Movistar, as.data.frame))
+#Lo guardamos como un csv
+#Buscar por hashtag
+#Ponemos exclude:retweets para que no salgan los retweets
+Movistar_1 <- searchTwitter("@MovistarCo", n= 1e5 , since = "2018-11-01")
+#convertir en base de datos
+Movistar_final_df <- tbl_df(map_df(Movistar_1, as.data.frame))
+#Exportar a csv
+write.csv(Movistar_final_df, "Clientes_Movistar.csv")
+write.csv(Movistar_df, "Movistar.csv")
+```
+
+```{r}
+#Creamos un objeto que guarde los tweets
+Claro <- userTimeline("ClaroColombia" , n = 1e5)
+#Comvertimos el objeto en una base de datos
+Claro_df <- tbl_df(map_df(Claro, as.data.frame))
+#Lo guardamos como un csv
+#write.csv(obamatweets_df, "luisguitweets.csv")
+#Buscar por hashtag
+#Por ejemplo si buscamos el hashtag #yeswecan
+#Ponemos exclude:retweets para que no salgan los retweets
+Claro_1 <- searchTwitter("@ClaroColombia", n= 1e5 , since = "2018-11-01")
+#convertir en base de datos
+Claro_final_df <- tbl_df(map_df(Claro_1, as.data.frame))
+#Exportar a csv
+write.csv(Claro_final_df, "Clientes_Claro.csv")
+write.csv(Claro_df, "Claro.csv")
+
+```
+```{r}
+#Creamos un objeto que guarde los tweets
+Tigo <- userTimeline("Tigo_Colombia" , n = 1e5)
+#Comvertimos el objeto en una base de datos
+Tigo_df <- tbl_df(map_df(Tigo , as.data.frame))
+#Lo guardamos como un csv
+#write.csv(obamatweets_df, "luisguitweets.csv")
+#Buscar por hashtag
+#Por ejemplo si buscamos el hashtag #yeswecan
+#Ponemos exclude:retweets para que no salgan los retweets
+Tigo_1 <- searchTwitter("@Tigo_Colombia", n= 1e5 , since = "2018-11-01")
+#convertir en base de datos
+Tigo_final_df <- tbl_df(map_df(Tigo_1, as.data.frame))
+#Exportar a csv
+write.csv(Tigo_final_df, "Clientes_Tigo.csv")
+write.csv(Tigo_df, "Tigo.csv")
+
+```
+
+```{r}
+#Creamos un objeto que guarde los tweets
+Virgin <- userTimeline("Virgin_MobileCo" , n = 1e5)
+#Comvertimos el objeto en una base de datos
+Virgin_df <- tbl_df(map_df(Virgin , as.data.frame))
+#Lo guardamos como un csv
+#write.csv(obamatweets_df, "luisguitweets.csv")
+#Buscar por hashtag
+#Por ejemplo si buscamos el hashtag #yeswecan
+#Ponemos exclude:retweets para que no salgan los retweets
+Virgin_1 <- searchTwitter("@Virgin_MobileCo", n= 1e5 , since = "2018-11-01")
+#convertir en base de datos
+Virgin_final_df <- tbl_df(map_df(Virgin_1, as.data.frame))
+#Exportar a csv
+write.csv(Virgin_final_df, "Clientes_Virgin.csv")
+write.csv(Virgin_df, "Virgin.csv")
+```
+
+```{r}
+#Creamos un objeto que guarde los tweets
+Avantel <- userTimeline("Avantel_sas" , n = 1e5)
+#Comvertimos el objeto en una base de datos
+Avantel_df <- tbl_df(map_df(Avantel , as.data.frame))
+#Lo guardamos como un csv
+#write.csv(obamatweets_df, "luisguitweets.csv")
+#Buscar por hashtag
+#Por ejemplo si buscamos el hashtag #yeswecan
+#Ponemos exclude:retweets para que no salgan los retweets
+Avantel_1 <- searchTwitter("@Avantel_sas", n= 1e5 , since = "2018-11-01")
+#convertir en base de datos
+Avantel_final_df <- tbl_df(map_df(Avantel_1, as.data.frame))
+#Exportar a csv
+write.csv(Avantel_final_df, "Clientes_Avantel.csv")
+write.csv(Avantel_df, "Avantel.csv")
+```
+
